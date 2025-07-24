@@ -1,0 +1,7 @@
+@import "base/nav.css";
+@import "base/footer.css";
+@import "base/base.css";
+@import "profile/registration.css";
+@import "cars/addcars.css";
+@import "cars/carsdashboard.css";
+@import "cars/cardetails.css";

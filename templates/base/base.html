@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Lato:ital,wght@0,700;1,300&display=swap"
+          rel="stylesheet">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            integrity="sha512‐XYZ…your‐integrity‐hash…abc" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script>
+    <title>LVDrive</title>
+</head>
+    <body>
+
+        {% include 'base/nav.html' %}
+
+        <div class="content-wrap">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        {% include 'base/footer.html' %}
+
+    </body>
+</html>

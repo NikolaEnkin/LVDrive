@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+    <section class="cars-section">
+
+        {% if cars %}
+            <h2 class="section-title">Luxury Cars Available</h2>
+            <div class="car-grid">
+            {% for car in cars %}
+                <div class="car-card">
+                    <a href="{% url 'car-details' car.pk %}">
+                        <div class="car-header">Luxury Car | {{ car.year }}</div>
+                        <div class="car-image">
+                            {% if car.image %}
+                                <img src="{{ car.image.url }}" alt="#">
+                            {% endif %}
+                        </div>
+                        <h3 class="car-title">{{ car.make }} {{ car.model_name }}</h3>
+                        <ul class="car-specs">
+                            <li>HP: {{ car.horse_power }} HP</li>
+                            <li>Engine Size: {{ car.engine_size }} cc</li>
+                            <li>Body Type: {{ car.body_type|capfirst }}</li>
+                            <li>Fuel Type: {{ car.fuel_type|capfirst }}</li>
+                        </ul>
+                        <div class="car-price">
+                            {{ car.price_per_hour }} EUR / hour
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h2 class="section-title">No Available Cars</h2>
+        {% endif %}
+        </div>
+    </section>
+
+{% endblock %}
+
+

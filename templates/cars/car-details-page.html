@@ -1,0 +1,69 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="car-detail-section">
+        <div class="container">
+            {% if car.owner.profile.full_name %}
+                <h1 class="detail-title">Car Owner: {{ car.owner.profile.full_name }}</h1>
+            {% else %}
+                <h1 class="detail-title">Owner: {{ car.owner }}</h1>
+            {% endif %}
+
+            <h2 class="detail-title">{{ car.make|capfirst }} {{ car.model_name|capfirst }}</h2>
+
+            <div class="detail-grid">
+                <div class="detail-image">
+                    <img src="{{ car.image.url }}"
+                         alt="{{ car.make }} {{ car.model_name }}">
+                </div>
+
+                <div class="detail-specs">
+                    <h2>Car Specifications</h2>
+
+                    {% if car.owner == request.user %}
+                        <ul class="edit-delete">
+                            <li>
+                                <a href="{% url 'edit-car' car.pk %}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   onclick="event.preventDefault(); document.getElementById('delete-form-{{ car.pk }}').submit();">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                                <form id="delete-form-{{ car.pk }}" action="{% url 'delete-car' car.pk %}" method="post" style="display: none;">
+                                    {% csrf_token %}
+                                </form>
+                            </li>
+                        </ul>
+                    {% endif %}
+
+                    <ul>
+                        <li>
+                            <i class="fa-solid fa-gauge"></i>
+                            HP: {{ car.horse_power }}
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-horse-head"></i>
+                            Engine Size: {{ car.engine_size }} cc
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-car-side"></i>
+                            Body Type: {{ car.body_type|capfirst }}
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-gas-pump"></i>
+                            Fuel Type: {{ car.fuel_type|capfirst }}
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-dollar-sign"></i>
+                            Price: {{ car.price_per_hour }} EUR
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

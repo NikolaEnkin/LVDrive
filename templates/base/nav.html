@@ -1,0 +1,79 @@
+{% load static %}
+
+<header>
+        <section class="header-content">
+        <article class="logo-container">
+            {% if not request.user.is_authenticated %}
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="LVDrive Logo">
+                </a>
+            {% else %}
+                <a href="{% url 'cars-dashboard' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="LVDrive Logo">
+                </a>
+            {% endif %}
+
+        </article>
+
+            {% if request.user.is_authenticated %}
+            <form class="search-container" action="{% url 'cars-dashboard' %}">
+            {{ search_form }}
+            <button type="submit" class="search-btn">
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20" height="20"
+                viewBox="0 0 24 24"
+                fill="transparent"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="ai ai-Search"
+              >
+                <path d="M21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0z"/>
+              </svg>
+            </button>
+          </form>
+            {% endif %}
+        <nav>
+            <ul>
+                {% if not request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link home-button" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cars-dashboard' %}">Cars</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link home-button" href="{% url 'cars-dashboard' %}">Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create-car' %}">Add Car</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Log Out
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </section>
+    </header>
+
+<form style="display: none;" id="logout-form" method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+</form>
