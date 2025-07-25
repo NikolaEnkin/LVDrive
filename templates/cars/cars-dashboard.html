@@ -10,7 +10,7 @@
             {% for car in cars %}
                 <div class="car-card">
                     <a href="{% url 'car-details' car.pk %}">
-                        <div class="car-header">Luxury Car | {{ car.year }}</div>
+                        <div class="car-header">LVDrive | {{ car.year }}</div>
                         <div class="car-image">
                             {% if car.image %}
                                 <img src="{{ car.image.url }}" alt="#">

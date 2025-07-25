@@ -42,7 +42,6 @@ class CarDetailsView(DetailView):
     template_name = 'cars/car-details-page.html'
 
 
-
 class CreateCarView(CreateView):
     model = Car
     form_class = CreateCarForm

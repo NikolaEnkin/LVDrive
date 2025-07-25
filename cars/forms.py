@@ -17,7 +17,7 @@ class BaseCarForm(forms.ModelForm):
             'body_type': 'Body Type',
             'fuel_type': 'Fuel Type',
             'features': 'Optional Features',
-            'image': 'Car Image [Optional]',
+            'image': 'Car Image',
         }
 
         widgets = {

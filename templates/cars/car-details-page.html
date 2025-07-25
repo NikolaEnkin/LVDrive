@@ -33,7 +33,8 @@
                                    onclick="event.preventDefault(); document.getElementById('delete-form-{{ car.pk }}').submit();">
                                     <i class="fa-solid fa-trash"></i>
                                 </a>
-                                <form id="delete-form-{{ car.pk }}" action="{% url 'delete-car' car.pk %}" method="post" style="display: none;">
+                                <form id="delete-form-{{ car.pk }}" action="{% url 'delete-car' car.pk %}" method="post"
+                                      style="display: none;">
                                     {% csrf_token %}
                                 </form>
                             </li>
@@ -62,6 +63,31 @@
                             Price: {{ car.price_per_hour }} EUR
                         </li>
                     </ul>
+
+                    {% if not car.owner == request.user and not car.is_available %}
+                        <div class="rent-btn-container">
+                            <a href="{% url 'create-booking' car.pk %}" class="btn-rent">
+                                Rent This Car
+                            </a>
+                        </div>
+                    {% elif request.user.pk == car.get_owner %}
+                        <div class="booking-group">
+                            <div class="change-btn-container">
+                                <a href="{% url 'create-booking' car.pk %}" class="btn-group">
+                                    Change Dates
+                                </a>
+                            </div>
+                            <div class="cancel-btn-container">
+                                <a href="{% url 'create-booking' car.pk %}" class="btn-group">
+                                    Cancel Booking
+                                </a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="h3">
+                            <h3>Car Is Already Rented!</h3>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

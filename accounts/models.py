@@ -2,6 +2,8 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.core.validators import MinLengthValidator
 from django.db import models
+from django.db.models import CASCADE
+
 from accounts.managers import AppUserManager
 from accounts.validators import ProfileNameValidator, PhoneNumberValidator
 
@@ -32,7 +34,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 class Profile(models.Model):
     user = models.OneToOneField(
         to=AppUser,
-        on_delete=models.CASCADE,
+        on_delete=CASCADE,
         related_name='profile',
     )
 

@@ -7,5 +7,5 @@ from accounts.forms import AppUserCreationForm
 class RegisterView(CreateView):
     form_class = AppUserCreationForm
     template_name = 'registration/register.html'
-    success_url = reverse_lazy('#')
+    success_url = reverse_lazy('login')
     # Uses signal to create the profile

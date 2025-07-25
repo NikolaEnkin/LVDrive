@@ -101,5 +101,58 @@
 
 .detail-specs ul.edit-delete li {
     border-bottom: none;
+}
 
+.rent-btn-container {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.btn-rent {
+    display: inline-block;
+    background-color: #fff;
+    color: #280137;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn-rent:hover {
+    background-color: #fff;
+    transform: translateY(-2px);
+}
+
+.h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: firebrick;
+    font-weight: 400;
+    font-family: sans-serif;
+}
+
+.booking-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.btn-group {
+    text-align: center;
+    display: inline-block;
+    background-color: #fff;
+    color: #280137;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn-group:hover {
+    background-color: #fff;
+    transform: translateY(-2px);
 }

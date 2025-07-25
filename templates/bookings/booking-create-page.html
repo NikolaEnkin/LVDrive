@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="booking-container">
+        <form method="post" enctype="multipart/form-data" class="booking-form">
+            {% csrf_token %}
+            <h2>Rent This Car</h2>
+            {{ form }}
+
+            <button type="submit">Confirm Booking</button>
+
+            <p class="form-link">
+                <a href="{% url 'car-details' car.pk %}">Back to Car Details</a>
+            </p>
+        </form>
+    </div>
+{% endblock %}

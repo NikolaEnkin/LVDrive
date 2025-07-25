@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
@@ -7,9 +8,12 @@ from bookings.choices import BookingStatusChoices
 from cars.models import Car
 
 
+UserModel = get_user_model()
+
 class Booking(models.Model):
-    user = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL,
+
+    owner = models.ForeignKey(
+        to=UserModel,
         on_delete=models.CASCADE,
         related_name='user_bookings'
     )
@@ -27,10 +31,15 @@ class Booking(models.Model):
     status = models.CharField(
         max_length=20,
         choices=BookingStatusChoices,
+        default=BookingStatusChoices.PENDING
     )
 
     created_at = models.DateTimeField(
         auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
     )
 
 
@@ -51,6 +60,9 @@ class Booking(models.Model):
 
     def save(self, *args, **kwargs) -> None:
         self.full_clean()
+
+        if self._state.adding:
+            self.status = BookingStatusChoices.ACTIVE
         super().save(*args, **kwargs)
 
 
