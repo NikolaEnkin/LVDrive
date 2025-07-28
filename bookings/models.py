@@ -20,7 +20,7 @@ class Booking(models.Model):
 
     car = models.ForeignKey(
         to=Car,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         related_name='car_bookings',
     )
 

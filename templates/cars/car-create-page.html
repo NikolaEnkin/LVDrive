@@ -6,6 +6,10 @@
         <form method="post" enctype="multipart/form-data" class="car-form">
             {% csrf_token %}
             {{ form }}
+            
+            <label>Additional Images: [Optional]</label>
+            <input type="file" name="images" multiple>
+            
             <button class="btn-submit" type="submit">Submit</button>
         </form>
     </div>

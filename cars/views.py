@@ -4,8 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
 from cars.forms import CreateCarForm, EditCarForm, SearchForm
-from cars.models import Car
-
+from cars.models import Car, CarImage
 
 
 class CarCatalogView(LoginRequiredMixin, ListView):
@@ -50,7 +49,14 @@ class CreateCarView(CreateView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
-        return super().form_valid(form)
+        response =  super().form_valid(form)
+
+        images = self.request.FILES.getlist('car_images')
+
+        for image in images:
+            CarImage.objects.create(car=self.object, image=image)
+
+        return response
 
 class EditCarView(UpdateView):
     model = Car

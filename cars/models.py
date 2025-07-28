@@ -46,6 +46,7 @@ class Car(models.Model):
     body_type = models.CharField(
         max_length=30,
         choices=CarBodyTypeChoices,
+        default=CarBodyTypeChoices.SEDAN
     )
 
     fuel_type = models.CharField(
@@ -73,6 +74,22 @@ class Car(models.Model):
         ).select_related('owner__profile').first()
 
         return booking.owner_id if booking else None
+
+
+class CarImage(models.Model):
+    car = models.ForeignKey(
+        to=Car,
+        on_delete=models.CASCADE,
+        related_name='car_images'
+    )
+
+    car_image = models.ImageField(
+        upload_to='car_extra_photos/'
+    )
+
+    uploaded_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
 
 

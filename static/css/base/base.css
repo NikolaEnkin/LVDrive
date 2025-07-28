@@ -144,6 +144,7 @@
 html, body {
     height: 100%;
     margin: 0;
+    background-color: #3a0f5c;
 }
 
 body {
@@ -153,11 +154,9 @@ body {
 
 
 .content-wrap {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
+    background-color: #3a0f5c !important;
 
+}
 
 
 

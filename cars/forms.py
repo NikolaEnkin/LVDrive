@@ -1,5 +1,5 @@
 from django import forms
-from cars.models import Car
+from cars.models import Car, CarImage
 
 
 class BaseCarForm(forms.ModelForm):
@@ -50,8 +50,8 @@ class BaseCarForm(forms.ModelForm):
                     'placeholder': 'Minimum 900 cc'
                 }
             ),
-        }
 
+        }
 
 class CreateCarForm(BaseCarForm):
     ...
