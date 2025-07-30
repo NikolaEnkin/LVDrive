@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+    <div class="booking-container">
+        <form method="post" enctype="multipart/form-data" class="booking-form">
+            {% csrf_token %}
+            <h2>Cancel Booking</h2>
+            {{ form }}
+            <button type="submit">Confirm Changes</button>
+        </form>
+    </div>
+{% endblock %}

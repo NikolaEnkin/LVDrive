@@ -1,5 +1,5 @@
 from django import forms
-
+from bookings.mixins import ReadOnlyFieldsMixin
 from bookings.models import Booking
 
 
@@ -28,6 +28,6 @@ class CreateBookingForm(BaseBookingForm):
 class EditBookingForm(BaseBookingForm):
     ...
 
-class DeleteBookingForm(BaseBookingForm):
+class DeleteBookingForm(ReadOnlyFieldsMixin, BaseBookingForm):
     ...
 

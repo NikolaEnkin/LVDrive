@@ -49,8 +49,6 @@ class CarDetailsView(DetailView):
         curr_time = timezone.now() + timedelta(hours=3)
 
         booking = car.car_bookings.filter(
-            start_datetime__lte=curr_time,
-            end_datetime__gte=curr_time,
             status='ACTIVE'
         ).first()
 

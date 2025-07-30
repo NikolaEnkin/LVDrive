@@ -5,5 +5,6 @@ urlpatterns = [
     path('<int:pk>/', include([
         path('add/', views.CreateBookingView.as_view(), name='create-booking'),
         path('edit/', views.EditBookingView.as_view(), name='edit-booking'),
+        path('delete/', views.DeleteBookingView.as_view(), name='delete-booking')
     ])),
 ]
