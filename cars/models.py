@@ -1,6 +1,9 @@
+from datetime import timedelta
+
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.template.context_processors import request
 from django.utils import timezone
 
 from cars.choices import CarBodyTypeChoices, CarFuelTypeChoices
@@ -65,15 +68,9 @@ class Car(models.Model):
         return self.car_bookings.filter(status='ACTIVE').exists()
 
     @property
-    def get_owner(self):
-        curr_time = timezone.now()
-        booking = self.car_bookings.filter(
-            start_datetime__lte=curr_time,
-            end_datetime__gte=curr_time,
-            status='ACTIVE'
-        ).select_related('owner__profile').first()
-
-        return booking.owner_id if booking else None
+    def get_booker(self):
+        booking = self.car_bookings.filter(status='ACTIVE').first()
+        return booking.booker if booking else None
 
 
 class CarImage(models.Model):

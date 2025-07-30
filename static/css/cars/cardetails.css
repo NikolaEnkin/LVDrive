@@ -2,7 +2,7 @@
     padding: 3rem 5%;
     background: #3a0f5c;
     color: #fff;
-    height: 80vh;
+    height: 100%;
 }
 
 .detail-title {
@@ -27,6 +27,21 @@
     object-fit: cover;
 }
 
+.extra-images {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.car-extra {
+    width: 200px;
+    height: 100%;
+    border-radius: 4px;
+}
+
+
 .detail-specs {
     background: #D4AF37;
     padding: 1.5rem;
@@ -39,9 +54,10 @@
     text-align: center;
     font-size: 40px;
     margin-top: 0;
+    margin-bottom: 20px;
     color: #280137;
     font-family: sans-serif;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 
 .detail-specs ul {
@@ -126,11 +142,11 @@
 
 .h3 {
     text-align: center;
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+    font-size: 1.7rem;
     color: firebrick;
     font-weight: 400;
     font-family: sans-serif;
+    border: 0.2rem;
 }
 
 .booking-group {
@@ -156,3 +172,5 @@
     background-color: #fff;
     transform: translateY(-2px);
 }
+
+

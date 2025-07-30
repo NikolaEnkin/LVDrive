@@ -28,3 +28,6 @@ class CreateBookingForm(BaseBookingForm):
 class EditBookingForm(BaseBookingForm):
     ...
 
+class DeleteBookingForm(BaseBookingForm):
+    ...
+

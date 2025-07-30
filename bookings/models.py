@@ -12,7 +12,7 @@ UserModel = get_user_model()
 
 class Booking(models.Model):
 
-    owner = models.ForeignKey(
+    booker = models.ForeignKey(
         to=UserModel,
         on_delete=models.CASCADE,
         related_name='user_bookings'

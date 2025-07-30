@@ -1,7 +1,10 @@
+from datetime import timedelta
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
 from cars.forms import CreateCarForm, EditCarForm, SearchForm
 from cars.models import Car, CarImage
@@ -40,6 +43,28 @@ class CarDetailsView(DetailView):
     model = Car
     template_name = 'cars/car-details-page.html'
 
+    def get_context_data(self, **kwargs):
+        kwargs = super().get_context_data(**kwargs)
+        car = self.get_object()
+        curr_time = timezone.now() + timedelta(hours=3)
+
+        booking = car.car_bookings.filter(
+            start_datetime__lte=curr_time,
+            end_datetime__gte=curr_time,
+            status='ACTIVE'
+        ).first()
+
+        kwargs.update(
+            {
+                'bookings': booking,
+                'now': curr_time,
+                'car': car
+            }
+        )
+
+        return kwargs
+
+
 
 class CreateCarView(CreateView):
     model = Car
@@ -51,10 +76,10 @@ class CreateCarView(CreateView):
         form.instance.owner = self.request.user
         response =  super().form_valid(form)
 
-        images = self.request.FILES.getlist('car_images')
+        images = self.request.FILES.getlist('images')
 
         for image in images:
-            CarImage.objects.create(car=self.object, image=image)
+            CarImage.objects.create(car=self.object, car_image=image)
 
         return response
 

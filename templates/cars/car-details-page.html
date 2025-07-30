@@ -16,6 +16,14 @@
                 <div class="detail-image">
                     <img src="{{ car.image.url }}"
                          alt="{{ car.make }} {{ car.model_name }}">
+                    {% if car.car_images %}
+                        <div class="extra-images">
+                            {% for image in car.car_images.all %}
+                                <img class="car-extra" src="{{ image.car_image.url }}"
+                                     alt="car-photos">
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
 
                 <div class="detail-specs">
@@ -70,12 +78,14 @@
                                 Rent This Car
                             </a>
                         </div>
-                    {% elif request.user.pk == car.get_owner %}
+                    {% elif request.user.pk == car.get_booker.pk %}
                         <div class="booking-group">
                             <div class="change-btn-container">
-                                <a href="{% url 'create-booking' car.pk %}" class="btn-group">
-                                    Change Dates
-                                </a>
+                                {% if bookings.start_datetime < now %}
+                                    <a href="{% url 'edit-booking' bookings.pk %}" class="btn-group">
+                                        Change Dates
+                                    </a>
+                                {% endif %}
                             </div>
                             <div class="cancel-btn-container">
                                 <a href="{% url 'create-booking' car.pk %}" class="btn-group">
@@ -85,7 +95,7 @@
                         </div>
                     {% else %}
                         <div class="h3">
-                            <h3>Car Is Already Rented!</h3>
+                            <h4>Car Is Already Booked</h4>
                         </div>
                     {% endif %}
                 </div>

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from django.views.generic import CreateView
-from bookings.forms import CreateBookingForm
+from django.views.generic import CreateView, UpdateView
+from bookings.forms import CreateBookingForm, EditBookingForm
 from bookings.models import Booking
 from cars.models import Car
 
@@ -12,11 +12,11 @@ class CreateBookingView(CreateView):
     form_class = CreateBookingForm
 
     def get_car(self):
-        return get_object_or_404(Car, pk=self.kwargs['car_pk'])
+        return get_object_or_404(Car, pk=self.kwargs['pk'])
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs.update({'instance':Booking(car=self.get_car(), owner=self.request.user)})
+        kwargs.update({'instance':Booking(car=self.get_car(), booker=self.request.user)})
 
         return kwargs
     
@@ -28,6 +28,11 @@ class CreateBookingView(CreateView):
         return kwargs
 
     def get_success_url(self):
-        return reverse('car-details', kwargs={'pk': self.kwargs['car_pk']})
+        return reverse('car-details', kwargs={'pk': self.kwargs['pk']})
 
+
+class EditBookingView(UpdateView):
+    model = Booking
+    template_name = 'bookings/edit-booking-page.html'
+    form_class = EditBookingForm
 
