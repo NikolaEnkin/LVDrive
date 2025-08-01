@@ -22,10 +22,10 @@
 }
 
 .profile-image {
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
-    object-fit: cover;
+    object-fit: fill;
     border: 3px solid #ccc;
     margin-bottom: 1rem;
 }
@@ -74,6 +74,9 @@
 
 .car-list li {
     padding: 0.5rem 0;
+    color: #ffffff;
+    font-size: 1.3rem;
+    list-style: none;
 }
 
 .empty-msg {
@@ -85,14 +88,24 @@
 }
 
 .car-image-profile {
-    width: 600px;
+    width: 650px;
     height: 300px;
     border-radius: 12px;
-    margin: 0.5rem 0;
+    margin: 1rem 0;
+    display: flex;
 }
 
 .car-profile-text {
     margin-right: 2rem;
     color: #ffffff;
     font-size: 1.3rem;
+    list-style: none;
+    display: inline;
 }
+
+.car-profile-text li {
+    list-style: none;
+}
+
+
+

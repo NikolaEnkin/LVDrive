@@ -1,9 +1,9 @@
 {% extends 'base/base.html' %}
-
 {% block content %}
-    <div class="body-content">
-        <h1 class="title"><strong>Add Car</strong></h1>
-        <form method="post" enctype="multipart/form-data" class="car-form">
+
+    <div class="register-container">
+        <form method="post" enctype="multipart/form-data" class="register-form">
+            <h2 class="title"><strong>Add Car</strong></h2>
             {% csrf_token %}
             {{ form }}
             
@@ -13,4 +13,5 @@
             <button class="btn-submit" type="submit">Submit</button>
         </form>
     </div>
+
 {% endblock %}

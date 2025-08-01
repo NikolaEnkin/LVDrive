@@ -86,7 +86,7 @@
                                 </a>
                             </div>
                         </div>
-                    {% else %}
+                    {% elif not request.user.pk == car.owner.pk %}
                         <div class="rent-btn-container">
                             <a href="{% url 'create-booking' car.pk %}" class="btn-rent">
                                 Rent This Car

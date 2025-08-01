@@ -1,6 +1,7 @@
 from datetime import timedelta
 from gc import get_objects
 
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render

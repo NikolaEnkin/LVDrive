@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base/base.html' %}
+{% block content %}
 
-</body>
-</html>
+    <div class="register-container">
+        <form method="post" enctype="multipart/form-data" class="register-form">
+            <h2>Edit Profile</h2>
+            {% csrf_token %}
+            {{ form }}
+
+            <button type="submit">Submit</button>
+
+            <div class="login-link">
+                <a href="{% url 'profile-details' profile.pk %}" class="sign-up-link">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

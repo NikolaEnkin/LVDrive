@@ -7,32 +7,44 @@
             <h2 class="profile-name"><strong>{{ profile.full_name }}</strong></h2>
 
             {% if profile.profile_image %}
-                <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="profile-image">
+                <img src="{{ profile.profile_image.url }}" alt="Profile Picture" class="profile-image">
             {% else %}
                 <img src="{% static 'images/default-avatar-profile-icon-social-600nw-1677509740.webp' %}"
                      alt="Profile Picture" class="profile-image">
             {% endif %}
 
             <ul class="edit-delete-profile">
-                <li><a href="#"><i class="fa-solid fa-pen-to-square"></i></a></li>
-                <li><a href="#"><i class="fa-solid fa-trash"></i></a></li>
+                <li><a href="{% url 'edit-profile' profile.pk %}"><i class="fa-solid fa-pen-to-square"></i></a></li>
+                <li>
+                    <a href="#" onclick="showDeleteConfirmation(event)" class="delete-btn">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </li>
             </ul>
+            <form id="delete-profile-form" method="post" action="{% url 'delete-profile' profile.pk %}"
+                  style="display: none;">
+                <p>Resolved URL: {% url 'delete-profile' profile.pk %}</p>
+                {% csrf_token %}
+            </form>
         </div>
     </div>
 
     <div class="profile-section">
         <h3>Rented Cars</h3>
-            <ul class="car-list">
-                {% for booking in object.user.user_bookings.all %}
-                    <li>
-                        {{ booking.car.make }} {{ booking.car.model_name }} –
-                        from {{ booking.start_datetime|date:"Y-m-d H:i" }}
-                        to {{ booking.end_datetime|date:"Y-m-d H:i" }}
-                    </li>
-                {% empty %}
-            </ul>
-                    <p class="empty-msg">No rented cars.</p>
-                {% endfor %}
+        <ul class="car-list">
+            {% for booking in object.user.user_bookings.all %}
+                <li>
+                    {{ booking.car.make }} {{ booking.car.model_name }} –
+                    From {{ booking.start_datetime|date:"Y-m-d H:i" }}
+                    To {{ booking.end_datetime|date:"Y-m-d H:i" }}
+                </li>
+                <li>
+                    <img src="{{ booking.car.image.url }}" alt="Car Image" class="car-image-profile">
+                </li>
+            {% empty %}
+                </ul>
+                <p class="empty-msg">No rented cars.</p>
+            {% endfor %}
     </div>
 
     <div class="profile-section">
@@ -40,17 +52,33 @@
         <ul class="car-list">
             {% for car in object.user.cars.all %}
                 <li class="car-profile-text">
-                    Make: {{ car.make }};
-                </li><li class="car-profile-text">
-                    Model: {{ car.model_name }};
-                </li>
-                <li>
+                    {{ car.make }} - {{ car.model_name }}
                     <img src="{{ car.image.url }}" alt="Car Image" class="car-image-profile">
                 </li>
-
                 </ul>
             {% empty %}
                 <p class="empty-msg">No cars lent</p>
             {% endfor %}
     </div>
+    <script>
+        function showDeleteConfirmation(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Your profile will be permanently deleted.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+                background: '#fff',
+                color: '#280137',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-profile-form').submit();
+                }
+            });
+        }
+    </script>
 {% endblock %}

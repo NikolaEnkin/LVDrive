@@ -5,6 +5,7 @@
     font-family: 'Segoe UI', sans-serif;
     line-height: 1.7;
     box-shadow: 0 0 20px rgba(44, 0, 62, 0.1);
+    min-height: 80vh;
 }
 
 .about-us-section .about-us-container {
