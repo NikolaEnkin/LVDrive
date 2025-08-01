@@ -45,10 +45,26 @@ class Booking(models.Model):
 
     def clean(self) -> str or None:
         if self.start_datetime and self.end_datetime:
+            curr_time = timezone.now()
             if self.end_datetime <= self.start_datetime:
                 raise ValidationError("End time must be after the start time!")
-            if self.start_datetime <= timezone.now():
+            if self.start_datetime <= curr_time:
                 raise ValidationError("Start time must be in the future!")
+
+            if not self.car_id:
+                return
+
+
+
+            overlap_booking = Booking.objects.filter(
+                car=self.car,
+                start_datetime__lt=self.end_datetime,
+                end_datetime__gt=self.start_datetime,
+                status='ACTIVE'
+            ).exclude(pk=self.pk).exists()
+
+            if overlap_booking:
+                raise ValidationError("The car is already booked for this period")
 
 
     def save(self, *args, **kwargs) -> None:

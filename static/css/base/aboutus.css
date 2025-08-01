@@ -1,0 +1,52 @@
+.about-us-section {
+    background-color: #ffffff;
+    color: #2c003e;
+    padding: 4rem 2rem;
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.7;
+    box-shadow: 0 0 20px rgba(44, 0, 62, 0.1);
+}
+
+.about-us-section .about-us-container {
+    max-width: 900px;
+    margin: auto;
+}
+
+
+.page-title {
+    font-size: 2.5rem;
+    color: #2c003e;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.about-us-section h2 {
+    font-size: 1.6rem;
+    margin-top: 2.5rem;
+    color: #D4AF37;
+    border-bottom: 1px solid #c2b280;
+    padding-bottom: 0.4rem;
+}
+
+.about-us-section p {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+.about-us-section ul {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+}
+
+.about-us-section li {
+    margin-bottom: 0.8rem;
+    font-size: 1.05rem;
+    position: relative;
+}
+
+.about-us-section li::before {
+    color: #c2b280;
+    font-size: 1rem;
+    margin-right: 0.6rem;
+}

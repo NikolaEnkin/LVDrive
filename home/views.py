@@ -1,12 +1,13 @@
-from django.shortcuts import render
-from django.template.context_processors import request
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
-from cars.models import Car
 
 
 class HomePageView(TemplateView):
-    def get_template_names(self):
-        if not self.request.user.is_authenticated:
-            return ['home/home-page-not-authenticated.html']
-        else:
-            return ['cars/cars-dashboard.html']
+    template_name = 'home/home-page-not-authenticated.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('cars-dashboard')
+        return super().dispatch(request, *args, **kwargs)
+class AboutUsView(TemplateView):
+    template_name = 'home/about-us.html'

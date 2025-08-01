@@ -1,4 +1,5 @@
 from datetime import timedelta
+from gc import get_objects
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -85,6 +86,16 @@ class EditCarView(UpdateView):
     model = Car
     form_class = EditCarForm
     template_name = 'cars/car-edit-page.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs = super().get_context_data(**kwargs)
+        car = self.get_object()
+
+        add_images = car.car_images
+        kwargs.update({"add_images": add_images})
+
+        return kwargs
+
 
     def get_success_url(self):
         return reverse_lazy('car-details', kwargs={'pk': self.kwargs.get(self.pk_url_kwarg)})

@@ -34,7 +34,7 @@ PROJECT_APPS = [
     'accounts',
     'cars',
     'bookings',
-    'comments',
+    'reviews',
     'home'
 ]
 

@@ -5,7 +5,7 @@ from cars.models import Car, CarImage
 class BaseCarForm(forms.ModelForm):
     class Meta:
         model = Car
-        exclude = ['booker']
+        exclude = ['owner']
 
         labels = {
             'make': 'Make',

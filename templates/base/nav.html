@@ -54,14 +54,14 @@
                     </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
+                    <a class="nav-link" href="{% url 'about-us' %}">About Us</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact Us</a>
                 </li>
                 {% if request.user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link" href="{% url 'profile-details' user.pk %}">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

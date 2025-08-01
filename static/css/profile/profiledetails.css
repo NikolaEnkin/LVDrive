@@ -1,0 +1,98 @@
+.profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: #ffffff;
+    justify-content: center;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.profile-name {
+    font-size: 2.3rem;
+    color: #D4AF37;
+    margin-bottom: 1rem;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ccc;
+    margin-bottom: 1rem;
+}
+
+.edit-delete-profile {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: #D4AF37;
+}
+
+.edit-delete-profile a {
+    text-decoration: none;
+    color: #D4AF37;
+    font-size: 1.5rem;
+}
+
+.profile-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+}
+
+.profile-section {
+    margin-top: 2rem;
+    margin-left: 30rem;
+    color: #D4AF37;
+}
+
+.profile-section h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    margin-left: -480px;
+}
+
+.car-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.car-list li {
+    padding: 0.5rem 0;
+}
+
+.empty-msg {
+    font-style: italic;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.3rem;
+    margin-left: -480px;
+}
+
+.car-image-profile {
+    width: 600px;
+    height: 300px;
+    border-radius: 12px;
+    margin: 0.5rem 0;
+}
+
+.car-profile-text {
+    margin-right: 2rem;
+    color: #ffffff;
+    font-size: 1.3rem;
+}

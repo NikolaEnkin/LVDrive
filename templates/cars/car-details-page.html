@@ -71,14 +71,7 @@
                             Price: {{ car.price_per_hour }} EUR
                         </li>
                     </ul>
-
-                    {% if not car.owner == request.user and not car.is_available %}
-                        <div class="rent-btn-container">
-                            <a href="{% url 'create-booking' car.pk %}" class="btn-rent">
-                                Rent This Car
-                            </a>
-                        </div>
-                    {% elif request.user.pk == car.get_booker.pk %}
+                    {% if request.user.pk == car.get_booker.pk %}
                         <div class="booking-group">
                             <div class="change-btn-container">
                                 {% if bookings.start_datetime < now %}
@@ -94,8 +87,10 @@
                             </div>
                         </div>
                     {% else %}
-                        <div class="h3">
-                            <h4>Car Is Already Booked</h4>
+                        <div class="rent-btn-container">
+                            <a href="{% url 'create-booking' car.pk %}" class="btn-rent">
+                                Rent This Car
+                            </a>
                         </div>
                     {% endif %}
                 </div>
