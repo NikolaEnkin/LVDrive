@@ -2,8 +2,8 @@
 {% load static %}
 
 {% block content %}
-    <div class="register-container">
-        <form class="register-form" method="post">
+    <div class="base-container-form">
+        <form class="submit-form" method="post">
             {% csrf_token %}
             <h1>Create an Account</h1>
             {% for field in form %}
@@ -22,7 +22,7 @@
 
             <p class="login-link">
                 Already have an account?
-                <a class="sign-up-link" href="{% url 'login' %}">Sign In</a>
+                <a class="form-link" href="{% url 'login' %}">Sign In</a>
             </p>
         </form>
     </div>

@@ -16,69 +16,101 @@
             <ul class="edit-delete-profile">
                 <li><a href="{% url 'edit-profile' profile.pk %}"><i class="fa-solid fa-pen-to-square"></i></a></li>
                 <li>
-                    <a href="#" onclick="showDeleteConfirmation(event)" class="delete-btn">
+                    <a href="{% url 'delete-profile' profile.pk %}" class="delete-btn">
                         <i class="fa-solid fa-trash"></i>
                     </a>
                 </li>
             </ul>
-            <form id="delete-profile-form" method="post" action="{% url 'delete-profile' profile.pk %}"
-                  style="display: none;">
-                <p>Resolved URL: {% url 'delete-profile' profile.pk %}</p>
-                {% csrf_token %}
-            </form>
         </div>
     </div>
 
     <div class="profile-section">
         <h3>Rented Cars</h3>
-        <ul class="car-list">
-            {% for booking in object.user.user_bookings.all %}
-                <li>
-                    {{ booking.car.make }} {{ booking.car.model_name }} –
-                    From {{ booking.start_datetime|date:"Y-m-d H:i" }}
-                    To {{ booking.end_datetime|date:"Y-m-d H:i" }}
-                </li>
-                <li>
-                    <img src="{{ booking.car.image.url }}" alt="Car Image" class="car-image-profile">
-                </li>
-            {% empty %}
-                </ul>
-                <p class="empty-msg">No rented cars.</p>
-            {% endfor %}
+        {% if object.user.user_bookings.all %}
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    {% for car in object.user.cars.all %}
+                        <button type="button"
+                                data-bs-target="#carouselExampleCaptions"
+                                data-bs-slide-to="{{ forloop.counter0 }}"
+                                class="{% if forloop.first %}active{% endif %}"
+                                aria-current="{% if forloop.first %}true{% endif %}"
+                                aria-label="Slide {{ forloop.counter }}">
+                        </button>
+                    {% endfor %}
+                </div>
+                <div class="carousel-inner">
+                    {% for booking in object.user.user_bookings.all %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{ booking.car.image.url }}" class="d-block w-100" alt="Car Image">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>{{ booking.car.make }} {{ booking.car.model_name }}</h5>
+                                <p>
+                                    From {{ booking.start_datetime|date:"Y-m-d H:i" }} <br>
+                                    To {{ booking.end_datetime|date:"Y-m-d H:i" }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        {% else %}
+            <p class="empty-msg">No rented cars</p>
+        {% endif %}
     </div>
 
     <div class="profile-section">
         <h3>Cars You've Lent</h3>
-        <ul class="car-list">
-            {% for car in object.user.cars.all %}
-                <li class="car-profile-text">
-                    {{ car.make }} - {{ car.model_name }}
-                    <img src="{{ car.image.url }}" alt="Car Image" class="car-image-profile">
-                </li>
-                </ul>
-            {% empty %}
-                <p class="empty-msg">No cars lent</p>
-            {% endfor %}
+        {% if object.user.cars.all %}
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <div class="carousel-indicators">
+                        {% for car in object.user.cars.all %}
+                            <button type="button"
+                                    data-bs-target="#carouselExampleCaptions"
+                                    data-bs-slide-to="{{ forloop.counter0 }}"
+                                    class="{% if forloop.first %}active{% endif %}"
+                                    aria-current="{% if forloop.first %}true{% endif %}"
+                                    aria-label="Slide {{ forloop.counter }}">
+                            </button>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="carousel-inner">
+                    {% for car in object.user.cars.all %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <a href="{% url 'car-details' car.pk %}">
+                                <img src="{{ car.image.url }}" class="d-block w-100" alt="Car Image">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>{{ car.make }} - {{ car.model_name }}</h5>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        {% else %}
+            <p class="empty-msg">No rented cars</p>
+        {% endif %}
     </div>
-    <script>
-        function showDeleteConfirmation(event) {
-            event.preventDefault();
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Your profile will be permanently deleted.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!',
-                background: '#fff',
-                color: '#280137',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('delete-profile-form').submit();
-                }
-            });
-        }
-    </script>
 {% endblock %}

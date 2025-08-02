@@ -1,8 +1,8 @@
 {% extends 'base/base.html' %}
 {% block content %}
 
-    <div class="register-container">
-        <form method="post" enctype="multipart/form-data" class="register-form">
+    <div class="base-container-form">
+        <form method="post" enctype="multipart/form-data" class="submit-form">
             <h2>Edit Profile</h2>
             {% csrf_token %}
             {{ form }}
@@ -10,7 +10,7 @@
             <button type="submit">Submit</button>
 
             <div class="login-link">
-                <a href="{% url 'profile-details' profile.pk %}" class="sign-up-link">Cancel</a>
+                <a href="{% url 'profile-details' profile.pk %}" class="form-link">Cancel</a>
             </div>
         </form>
     </div>

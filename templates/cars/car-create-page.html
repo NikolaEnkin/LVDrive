@@ -1,8 +1,8 @@
 {% extends 'base/base.html' %}
 {% block content %}
 
-    <div class="register-container">
-        <form method="post" enctype="multipart/form-data" class="register-form">
+    <div class="base-container-form">
+        <form method="post" enctype="multipart/form-data" class="submit-form">
             <h2 class="title"><strong>Add Car</strong></h2>
             {% csrf_token %}
             {{ form }}

@@ -56,7 +56,6 @@
 
 .profile-section {
     margin-top: 2rem;
-    margin-left: 30rem;
     color: #D4AF37;
 }
 
@@ -64,7 +63,6 @@
     font-size: 2rem;
     margin-bottom: 1rem;
     text-align: center;
-    margin-left: -480px;
 }
 
 .car-list {
@@ -84,7 +82,6 @@
     color: #ffffff;
     text-align: center;
     font-size: 1.3rem;
-    margin-left: -480px;
 }
 
 .car-image-profile {
@@ -106,6 +103,29 @@
 .car-profile-text li {
     list-style: none;
 }
+
+.profile-section .carousel-item img {
+    height: 460px;
+    border-radius: 50px;
+}
+
+.profile-section .carousel {
+    margin: 0 20%;
+    margin-bottom: 30px;
+}
+
+.profile-section .carousel-item h5 {
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 45%;
+    text-decoration: underline;
+}
+
+
+
+
+
 
 
 

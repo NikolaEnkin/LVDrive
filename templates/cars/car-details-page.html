@@ -13,17 +13,27 @@
             <h2 class="detail-title">{{ car.make|capfirst }} {{ car.model_name|capfirst }}</h2>
 
             <div class="detail-grid">
-                <div class="detail-image">
-                    <img src="{{ car.image.url }}"
-                         alt="{{ car.make }} {{ car.model_name }}">
-                    {% if car.car_images %}
-                        <div class="extra-images">
-                            {% for image in car.car_images.all %}
-                                <img class="car-extra" src="{{ image.car_image.url }}"
-                                     alt="car-photos">
-                            {% endfor %}
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ car.image.url }}" class="d-block w-100" alt="Car Image">
                         </div>
-                    {% endif %}
+                        {% for car in car.car_images.all %}
+                            <div class="carousel-item">
+                                <img src="{{ car.car_image.url }}" class="d-block w-100" alt="Car Image">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
 
                 <div class="detail-specs">

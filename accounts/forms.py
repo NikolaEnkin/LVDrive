@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+
+from accounts.mixins import ReadOnlyFieldsMixin
 from accounts.models import Profile
 
 UserModel = get_user_model()
@@ -22,8 +24,7 @@ class AppUserCreationForm(UserCreationForm):
             })
         }
 
-class EditProfileForm(forms.ModelForm):
-
+class BaseProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ['user']
@@ -36,17 +37,28 @@ class EditProfileForm(forms.ModelForm):
                 'placeholder': 'Enter your last name'
             }),
             'phone_number': forms.TextInput(attrs={
-                'placeholder': 'Enter your phone number '
+                'placeholder': 'Enter your phone number'
             }),
             'date_of_birth': forms.DateInput(attrs={
                 'type': 'date'
             }),
-            'driver_license_number': forms.DateInput(attrs={
-                'type': 'date'
+            'driver_license_number': forms.TextInput(attrs={
+                'placeholder': 'Enter your driver license number'
             }),
             'driver_license_expiry': forms.DateInput(attrs={
                 'type': 'date'
             }),
         }
 
+        labels ={
+            'driver_license_expiry': 'Driver licence expiry date'
+        }
+
+class EditProfileForm(BaseProfileForm):
+    ...
+
+
+
+class DeleteProfileForm(ReadOnlyFieldsMixin, BaseProfileForm):
+    ...
 
