@@ -47,48 +47,7 @@ header nav ul {
     justify-content: space-between;
 }
   
-.search-container {
-    display: flex;
-    align-items: center;
-    border: 1.5px solid;
-    width: 20px;
-  }
-  
-.search-input {
-    padding: 9px 22px;
-    border: 2px solid #D4AF37;
-    border-right: none;
-    border-radius: 7px 0 0 7px;
-    font-size: 14px;
-    outline: none;
-  }
-  
 
-.search-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 12px;
-    border: 1px solid #D4AF37;
-    border-radius: 0 7px 7px 0;
-    background-color: #280137;  
-    cursor: pointer;
-    height: 2.8vh;
-  }
-  
-
-.search-btn:hover {
-    background-color: #3a0f5c;
-    font-weight: bold;  
-  }
-  
-
-.search-btn svg {
-    display: block;
-    width: 20px;
-    height: 20px;
-    stroke: white;  
-  }
 
 .home-button {
     background-color: #D4AF37;
