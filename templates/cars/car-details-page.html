@@ -135,7 +135,7 @@
                     </div>
                 </form>
             </div>
-        {% endif %} 
+        {% endif %}
 
         <script>
             document.addEventListener('DOMContentLoaded', async () => {
@@ -166,7 +166,7 @@
                         await getReview();
                     } else {
                         const error = await response.json();
-                        alert('Error: ' + (error.detail || 'Something went wrong.'));
+                        alert('Error: ' + (error.detail || '.'));
                     }
                 });
             }

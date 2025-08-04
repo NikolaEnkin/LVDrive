@@ -9,5 +9,9 @@ class HomePageView(TemplateView):
         if request.user.is_authenticated:
             return redirect('cars-dashboard')
         return super().dispatch(request, *args, **kwargs)
+
 class AboutUsView(TemplateView):
     template_name = 'home/about-us-page.html'
+
+class ContactUsView(TemplateView):
+    template_name = 'home/contact-us-page.html'

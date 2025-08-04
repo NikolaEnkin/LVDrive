@@ -22,7 +22,7 @@
                 </li>
             </ul>
         </div>
-    </div>
+    
 
     <div class="profile-section">
         <h3>Rented Cars</h3>
@@ -91,9 +91,7 @@
                         <div class="carousel-item {% if forloop.first %}active{% endif %}">
                             <a href="{% url 'car-details' car.pk %}">
                                 <img src="{{ car.image.url }}" class="d-block w-100" alt="Car Image">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>{{ car.make }} - {{ car.model_name }}</h5>
-                                </div>
+                                
                             </a>
                         </div>
                     {% endfor %}
@@ -112,5 +110,6 @@
         {% else %}
             <p class="empty-msg">No rented cars</p>
         {% endif %}
+    </div>
     </div>
 {% endblock %}

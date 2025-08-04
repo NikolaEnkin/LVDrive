@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base/base.html' %}
 
-</body>
-</html>
+{% block content %}
+    <section class="contact-us-section">
+        <div class="contact-us-container">
+            <h1 class="page-title">Contact Us</h1>
+
+            <p>
+                Have questions, feedback, or need help? We’d love to hear from you. Feel free to reach out via the
+                contact details below:
+            </p>
+
+            <ul>
+                <li><strong>Phone:</strong> +359 12 345 678</li>
+                <li><strong>Email:</strong> lvdrive_email@gmail.com</li>
+            </ul>
+
+            <h2>Follow Us</h2>
+            <ul>
+                <li><a href="https://www.facebook.com/niki.enkin">Facebook</a></li>
+                <li><a href="https://www.linkedin.com/in/nikola-enkin-ba0207176">LinkedIn</a></li>
+                <li><a href="https://www.instagram.com/nikola.enkin">Instagram</a></li>
+            </ul>
+        </div>
+    </section>
+
+{% endblock %}

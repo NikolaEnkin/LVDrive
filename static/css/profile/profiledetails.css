@@ -4,6 +4,7 @@
     padding: 2rem;
     color: #ffffff;
     justify-content: center;
+    min-height: 80vh;
 }
 
 .profile-header {

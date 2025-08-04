@@ -46,3 +46,22 @@
 .review-form {
     background-color: #D4AF37;
 }
+
+#reviewList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
+    margin-top: 1rem;
+}
+
+.review-card {
+    flex: 0 1 calc(33.333% - 1rem);
+    background-color: #320052;
+    border: 1px solid #D4AF37;
+    border-radius: 10px;
+    padding: 1rem;
+    color: white;
+    box-sizing: border-box;
+    min-width: 200px;
+}
