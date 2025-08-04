@@ -16,6 +16,7 @@ from reviews.models import Review
 
 class CarCatalogView(LoginRequiredMixin, ListView):
     model = Car
+    paginate_by = 8
     template_name = 'cars/cars-dashboard.html'
     query_param = 'query'
     form_class = SearchForm
@@ -40,6 +41,8 @@ class CarCatalogView(LoginRequiredMixin, ListView):
                 |
                 Q(model_name__icontains=search_value)
             )
+        else:
+            queryset = self.model.objects.all().order_by('-year')
 
         return queryset
 

@@ -185,8 +185,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .search-container {
@@ -229,19 +229,20 @@
 .reviews-section {
     margin-top: 3rem;
     padding: 2rem;
-    background-color: #1c0033;
+    background-color: #280137;
     border-radius: 12px;
+    border: 1px solid #D4AF37;
 }
 
-.section-title {
+.reviews-section .section-title {
     font-size: 2rem;
-    color: #e7c646;
+    color: #D4AF37;
     margin-bottom: 1.5rem;
 }
 
 .review-card {
     background-color: #2d004b;
-    border: 1px solid #e7c646;
+    border: 1px solid #D4AF37;
     border-radius: 10px;
     padding: 1rem 1.5rem;
     margin-bottom: 1.5rem;
@@ -253,7 +254,7 @@
     justify-content: space-between;
     margin-bottom: 0.5rem;
     font-weight: bold;
-    color: #e7c646;
+    color: #D4AF37;
 }
 
 .review-text {
@@ -269,8 +270,8 @@
 }
 
 .review-form-container {
-    background-color: #1c0033;
-    border: 1px solid #e7c646;
+    background-color: #280137;
+    border: 1px solid #D4AF37;
     border-radius: 12px;
     padding: 2rem;
     max-width: 500px;
@@ -279,7 +280,7 @@
 
 .form-title {
     text-align: center;
-    color: #e7c646;
+    color: #D4AF37;
     margin-bottom: 1rem;
     font-size: 1.5rem;
 }
@@ -297,7 +298,7 @@
 .form-input {
     width: 100%;
     padding: 0.5rem;
-    border: 1px solid #e7c646;
+    border: 1px solid #D4AF37;
     border-radius: 5px;
     background-color: #f8f9fa;
     color: #000;
@@ -311,7 +312,7 @@
 
 .submit-btn {
     padding: 0.6rem 1.5rem;
-    background-color: #e7c646;
+    background-color: #D4AF37;
     color: #1c0033;
     border: none;
     border-radius: 8px;
@@ -325,6 +326,6 @@
 }
 
 .no-reviews {
-    color: #bbb;
+    color: #D4AF37;
     font-style: italic;
 }

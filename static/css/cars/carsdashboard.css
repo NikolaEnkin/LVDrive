@@ -101,3 +101,12 @@
     text-decoration: none;
     min-height: calc(100vh - 250px);
 }
+
+.pagination {
+    justify-content: center;
+}
+
+.pagination dl, ol, ul {
+    font-size: 1.3rem;
+    margin-bottom: 1.4rem;
+}
