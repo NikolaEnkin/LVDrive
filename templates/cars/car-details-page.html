@@ -106,5 +106,102 @@
                 </div>
             </div>
         </div>
+
+        <div class="reviews-section">
+            <h3 class="section-title">Reviews</h3>
+            <div id="reviewList"></div>
+        </div>
+
+        {% if can_review %}
+            <div class="review-form-container">
+                <h4 class="form-title">Leave a Review</h4>
+
+                <form id="reviewForm">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="comment" class="form-label">Your Comment</label>
+                        <textarea class="form-input" name="comment" id="comment" rows="3"
+                                  placeholder="Write your review..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rating" class="form-label">Rating (1–5)</label>
+                        <input type="number" class="form-input" name="rating" id="rating"
+                               min="1" max="5" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">Submit</button>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+
+        <script>
+            document.addEventListener('DOMContentLoaded', async () => {
+                await getReview();
+            });
+
+            const form = document.getElementById('reviewForm');
+
+            if (form) {
+                form.addEventListener('submit', async function (event) {
+                    event.preventDefault();
+
+                    const comment = document.getElementById('comment').value;
+                    const rating = document.getElementById('rating').value;
+                    const carId = {{ car.pk }};
+
+                    const response = await fetch(`/cars/${carId}/review/`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}',
+                        },
+                        body: JSON.stringify({comment, rating: parseInt(rating)})
+                    });
+
+                    if (response.ok) {
+                        document.querySelector('.review-form-container')?.remove();
+                        await getReview();
+                    } else {
+                        const error = await response.json();
+                        alert('Error: ' + (error.detail || 'Something went wrong.'));
+                    }
+                });
+            }
+
+            async function getReview() {
+                const reviewList = document.getElementById('reviewList');
+                reviewList.innerHTML = '';
+                const carId = {{ car.pk }};
+
+                const response = await fetch(`/cars/${carId}/reviews/`);
+                const data = await response.json();
+
+                if (data.length === 0) {
+                    reviewList.innerHTML = '<p class="no-reviews">No reviews for this car yet.</p>';
+                    return;
+                }
+
+                data.forEach(review => {
+                    const div = document.createElement('div');
+                    div.className = 'review-card';
+                    div.innerHTML = `
+                <div class="review-content">
+                    <div class="review-header">
+                        <span class="review-author">${review.reviewer_email}</span>
+                        <span class="review-rating">${review.rating}/5</span>
+                    </div>
+                    <p class="review-text">${review.comment}</p>
+                    <p class="review-date">${new Date(review.created_at).toLocaleDateString()}</p>
+                </div>
+            `;
+                    reviewList.appendChild(div);
+                });
+            }
+        </script>
     </section>
+
+
 {% endblock %}

@@ -5,11 +5,13 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render
+from django.template.context_processors import request
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
 from cars.forms import CreateCarForm, EditCarForm, SearchForm
 from cars.models import Car, CarImage
+from reviews.models import Review
 
 
 class CarCatalogView(LoginRequiredMixin, ListView):
@@ -54,11 +56,21 @@ class CarDetailsView(DetailView):
             status='ACTIVE'
         ).first()
 
+        reviews = Review.objects.filter(
+            car=car,
+        ).select_related(
+            'reviewer'
+        )
+
+        can_review = self.request.user.is_authenticated and not reviews.filter(reviewer=self.request.user).exists()
+
         kwargs.update(
             {
                 'bookings': booking,
                 'now': curr_time,
-                'car': car
+                'car': car,
+                'reviews': reviews,
+                'can_review': can_review
             }
         )
 

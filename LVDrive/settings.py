@@ -35,7 +35,8 @@ PROJECT_APPS = [
     'cars',
     'bookings',
     'reviews',
-    'home'
+    'home',
+    'rest_framework'
 ]
 
 INSTALLED_APPS = [

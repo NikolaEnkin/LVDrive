@@ -34,6 +34,11 @@ class DeleteProfileView(DeleteView, FormView):
     form_class = DeleteProfileForm
     success_url = reverse_lazy('home')
 
+    def get_initial(self):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        booking = self.model.objects.get(pk=pk)
+        return booking.__dict__
+
     def post(self, request, *args, **kwargs):
         profile = self.get_object()
         user = profile.user

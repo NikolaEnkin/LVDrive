@@ -3,6 +3,7 @@
     background: #3a0f5c;
     color: #fff;
     height: 100%;
+    min-height: 80vh;
 }
 
 .detail-title {
@@ -225,3 +226,105 @@
 }
 
 
+.reviews-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: #1c0033;
+    border-radius: 12px;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: #e7c646;
+    margin-bottom: 1.5rem;
+}
+
+.review-card {
+    background-color: #2d004b;
+    border: 1px solid #e7c646;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    max-width: 300px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #e7c646;
+}
+
+.review-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #f0f0f0;
+}
+
+.review-date {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-top: 0.5rem;
+}
+
+.review-form-container {
+    background-color: #1c0033;
+    border: 1px solid #e7c646;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+.form-title {
+    text-align: center;
+    color: #e7c646;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #ddd;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e7c646;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    color: #000;
+    font-size: 1rem;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.submit-btn {
+    padding: 0.6rem 1.5rem;
+    background-color: #e7c646;
+    color: #1c0033;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #f8d24f;
+}
+
+.no-reviews {
+    color: #bbb;
+    font-style: italic;
+}

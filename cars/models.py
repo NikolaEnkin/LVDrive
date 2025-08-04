@@ -73,6 +73,7 @@ class Car(models.Model):
         return booking.booker if booking else None
 
 
+
 class CarImage(models.Model):
     car = models.ForeignKey(
         to=Car,
