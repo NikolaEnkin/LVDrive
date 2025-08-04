@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -19,6 +20,13 @@ class CreateBookingView(CreateView):
     def form_valid(self, form):
         form.instance.car = self.get_car()
         form.instance.booker = self.request.user
+
+        try:
+            form.instance.full_clean()
+        except ValidationError as e:
+            form.add_error(None, e)
+            return self.form_invalid(form)
+
         return super().form_valid(form)
     
     def get_context_data(self, **kwargs):

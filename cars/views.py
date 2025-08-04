@@ -1,11 +1,7 @@
 from datetime import timedelta
-from gc import get_objects
-
-from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
-from django.shortcuts import render
-from django.template.context_processors import request
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
@@ -14,13 +10,14 @@ from cars.models import Car, CarImage
 from reviews.models import Review
 
 
-class CarCatalogView(LoginRequiredMixin, ListView):
+class CarCatalogView(LoginRequiredMixin, ListView, PermissionRequiredMixin):
     model = Car
     paginate_by = 8
     template_name = 'cars/cars-dashboard.html'
     query_param = 'query'
     form_class = SearchForm
     context_object_name = 'cars'
+    permission_required = 'cars.approve_car'
 
     def get_context_data(self, *, object_list = None, **kwargs):
         kwargs.update({
@@ -35,16 +32,33 @@ class CarCatalogView(LoginRequiredMixin, ListView):
         queryset = self.model.objects.all()
         search_value = self.request.GET.get(self.query_param)
 
+        if not self.has_permission():
+            queryset = queryset.filter(approved=True)
+
         if search_value:
             queryset = queryset.filter(
                 Q(make__icontains=search_value)
                 |
                 Q(model_name__icontains=search_value)
             )
-        else:
-            queryset = self.model.objects.all().order_by('-year')
 
-        return queryset
+
+        return queryset.order_by('-year')
+
+def approve_car(request, pk):
+    if request.method == 'POST':
+        car = Car.objects.get(pk=pk)
+        car.approved = True
+        car.save()
+
+        return redirect('cars-dashboard')
+
+def deny_car(request, pk):
+    if request.method == "POST":
+        car = Car.objects.get(pk=pk)
+        car.delete()
+
+        return redirect('cars-dashboard')
 
 class CarDetailsView(DetailView):
     model = Car

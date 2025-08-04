@@ -9,7 +9,10 @@ urlpatterns = [
         path('details/', views.CarDetailsView.as_view(), name='car-details'),
         path('edit/', views.EditCarView.as_view(), name='edit-car'),
         path('delete/', views.DeleteCarView.as_view(), name='delete-car'),
+        path('approve/', views.approve_car, name='approve-car'),
+        path('deny/', views.deny_car, name='deny-car'),
         path('review/', CreateReviewAPIView.as_view(), name='create-review'),
         path('reviews/', GetReviewAPIView.as_view(), name='list-review')
+
     ]))
 ]

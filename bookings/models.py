@@ -43,7 +43,7 @@ class Booking(models.Model):
     )
 
 
-    def clean(self) -> str or None:
+    def clean(self):
         if self.start_datetime and self.end_datetime:
             curr_time = timezone.now()
             if self.end_datetime <= self.start_datetime:
@@ -67,7 +67,8 @@ class Booking(models.Model):
                 raise ValidationError("The car is already booked for this period")
 
 
-    def save(self, *args, **kwargs) -> None:
+
+    def save(self, *args, **kwargs):
         self.full_clean()
 
         if self._state.adding:

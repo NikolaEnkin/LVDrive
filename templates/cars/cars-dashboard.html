@@ -39,7 +39,32 @@
                                 <img src="{{ car.image.url }}" alt="#">
                             {% endif %}
                         </div>
-                        <h3 class="car-title">{{ car.make }} {{ car.model_name }}</h3>
+                        <h3 class="car-title">
+                            {{ car.make }} {{ car.model_name }}
+                            {% if perms.cars.approve_car and not car.approved %}
+                                
+                                <a href="#"
+                                   onclick="event.preventDefault(); document.getElementById('approve-form').submit();">
+                                    <i class="fa-solid fa-check"></i>
+                                </a>
+                                
+                                <form id="approve-form" style="display: none" action="{% url 'approve-car' car.pk %}"
+                                      method="post">
+                                    {% csrf_token %}
+                                </form>
+
+                                <a href="#"
+                                   onclick="event.preventDefault(); document.getElementById('deny-form').submit();">
+                                    <i class="fa-solid fa-xmark text-danger"></i>
+                                </a>
+
+                                <form id="deny-form" style="display: none" action="{% url 'deny-car' car.pk %}"
+                                      method="post">
+                                    {% csrf_token %}
+                                </form>
+                                
+                            {% endif %}
+                        </h3>
                         <ul class="car-specs">
                             <li>HP: {{ car.horse_power }} HP</li>
                             <li>Engine Size: {{ car.engine_size }} cc</li>
@@ -80,7 +105,8 @@
                         </li>
                     {% else %}
                         <li>
-                        <a class="page-link" href="?page={{ page_num }}{% if query %}&query={{ query }}{% endif %}">{{ page_num }}</a>
+                            <a class="page-link"
+                               href="?page={{ page_num }}{% if query %}&query={{ query }}{% endif %}">{{ page_num }}</a>
                         </li>
                     {% endif %}
                 {% endif %}

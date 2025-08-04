@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
-
 from accounts.mixins import ReadOnlyFieldsMixin
 from accounts.models import Profile
 
@@ -23,6 +22,11 @@ class AppUserCreationForm(UserCreationForm):
                 'label': 'Hello'
             })
         }
+
+class AppUserChangeForm(UserChangeForm):
+    class Meta:
+        model = UserModel
+        fields = ('email', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
 
 class BaseProfileForm(forms.ModelForm):
     class Meta:

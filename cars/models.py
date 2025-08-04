@@ -63,6 +63,15 @@ class Car(models.Model):
         upload_to='cars/',
     )
 
+    approved = models.BooleanField(
+        default=False,
+    )
+
+    class Meta:
+        permissions = [
+            ('approve_car', 'Can approve car')
+        ]
+
     @property
     def is_available(self):
         return self.car_bookings.filter(status='ACTIVE').exists()
