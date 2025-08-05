@@ -1,7 +1,7 @@
 from datetime import timedelta
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
@@ -47,7 +47,7 @@ class CarCatalogView(LoginRequiredMixin, ListView, PermissionRequiredMixin):
 
 def approve_car(request, pk):
     if request.method == 'POST':
-        car = Car.objects.get(pk=pk)
+        car = get_object_or_404(Car, pk=pk)
         car.approved = True
         car.save()
 
@@ -55,7 +55,7 @@ def approve_car(request, pk):
 
 def deny_car(request, pk):
     if request.method == "POST":
-        car = Car.objects.get(pk=pk)
+        car = get_object_or_404(Car, pk=pk)
         car.delete()
 
         return redirect('cars-dashboard')

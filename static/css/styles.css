@@ -3,6 +3,7 @@
 @import "base/base.css";
 @import "base/aboutus.css";
 @import "base/contactus.css";
+@import "base/404.css";
 @import "profile/registration.css";
 @import "profile/profiledetails.css";
 @import "cars/addcars.css";
@@ -10,3 +11,4 @@
 @import "cars/cardetails.css";
 @import "bookings/addbooking.css";
 @import "reviews/review.css";
+

@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+<div class="not-found-fullscreen">
+    <img src="{% static 'images/404image.png' %}" alt="Not Found" class="error-fullscreen-image">
+    <a href="{% url 'home' %}" class="btn-home-overlay">Go Back Home</a>
+</div>
+{% endblock %}
