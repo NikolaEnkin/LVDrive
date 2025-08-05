@@ -163,6 +163,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.AppUser'
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS').split(',')
+
 
 LOGIN_REDIRECT_URL = reverse_lazy('cars-dashboard')
 LOGOUT_REDIRECT_URL = reverse_lazy('home')
