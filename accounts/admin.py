@@ -43,4 +43,5 @@ class UserModelAdmin(UserAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    ...
+    list_display = ['first_name', 'last_name']
+    ordering = ['first_name']
