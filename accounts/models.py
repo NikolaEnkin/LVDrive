@@ -3,7 +3,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.core.validators import MinLengthValidator
 from django.db import models
 from django.db.models import CASCADE
-
+from cloudinary.models import CloudinaryField
 from accounts.managers import AppUserManager
 from accounts.validators import ProfileNameValidator, PhoneNumberValidator
 
@@ -84,12 +84,12 @@ class Profile(models.Model):
         blank=True,
     )
 
-    profile_image = models.ImageField(
-        upload_to = 'profiles/',
-        blank = True,
-        null = True
+    profile_image = CloudinaryField(
+        'profile_image',
+        blank=True,
+        null=True,
     )
-    
+
     @property
     def full_name(self):
         if self.first_name and self.last_name:

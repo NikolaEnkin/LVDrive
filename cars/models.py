@@ -1,11 +1,10 @@
-from datetime import timedelta
 
+from cloudinary.models import CloudinaryField
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.template.context_processors import request
 from django.utils import timezone
-
 from cars.choices import CarBodyTypeChoices, CarFuelTypeChoices
 from cars.validators import CarEngineSizeValidator
 
@@ -59,9 +58,7 @@ class Car(models.Model):
     )
 
 
-    image = models.ImageField(
-        upload_to='cars/',
-    )
+    image = CloudinaryField('car_main_image')
 
     approved = models.BooleanField(
         default=False,
@@ -90,9 +87,7 @@ class CarImage(models.Model):
         related_name='car_images'
     )
 
-    car_image = models.ImageField(
-        upload_to='car_extra_photos/'
-    )
+    car_image = CloudinaryField('car_extra_image')
 
     uploaded_at = models.DateTimeField(
         auto_now_add=True
